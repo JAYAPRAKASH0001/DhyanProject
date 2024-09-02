@@ -1,0 +1,532 @@
+/* Container for all the cards */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* Individual card styling */
+.card {
+    background-color: #ffffff; /* Changed to pure white for a cleaner look */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Needed for menu positioning */
+}
+
+/* Card hover effect */
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Card header styling */
+.card-header {
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+/* Card header title */
+.card-header h3 {
+    font-size: 1.5rem;
+    color: #007bff;
+    margin: 0;
+}
+
+/* Card menu */
+.card-menu {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* Menu button */
+.card-menu button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #007bff; /* Ensure menu icon color is visible */
+}
+
+/* Menu options */
+.menu-options {
+    display: none;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    width: 120px; /* Slightly wider to accommodate text */
+}
+
+/* Menu options buttons */
+.menu-options button {
+    display: block;
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 10px;
+    cursor: pointer;
+    text-align: left; /* Align text to the left */
+}
+
+/* Menu options button hover */
+.menu-options button:hover {
+    background: #f0f0f0;
+}
+
+/* Display menu options when card is hovered */
+.card:hover .menu-options {
+    display: block;
+}
+
+/* Card body content */
+.card-body p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Card body strong text */
+.card-body strong {
+    color: #555;
+}
+
+/* Button styling */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Applicants list styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Applicant list items */
+li {
+    background-color: #f1f1f1;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Vertically center items */
+    justify-content: space-between; /* Space between name and buttons */
+    position: relative; /* For positioning buttons */
+}
+
+/* Name and button container */
+.applicant-info {
+    flex: 1; /* Takes up available space */
+}
+
+/* Buttons container */
+.applicant-buttons {
+    display: flex;
+    gap: 5px; /* Space between buttons */
+}
+
+/* Adjust button styles if necessary */
+.applicant-buttons button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.applicant-buttons button:hover {
+    background-color: #0056b3;
+}
+
+/* Headers */
+h2, h3 {
+    text-align: center;
+    color: #333;
+    margin: 0;
+}
+
+/* Modal styles */
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 1000; /* Ensure modal is above other content */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+/* Modal content */
+.modal-content {
+    background-color: #ffffff; /* Changed to pure white for a cleaner look */
+    margin: 5% auto;
+    padding: 30px; /* Increased padding for a more spacious interior */
+    border: 1px solid #888;
+    width: 90%; /* Increased width for larger modal */
+    max-width: 800px; /* Increased max-width for better responsiveness */
+}
+
+/* Close button for modal */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 32px; /* Increased font size for the close button */
+    font-weight: bold;
+}
+
+/* Close button hover effect */
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* Modal container */
+.edit-job-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+    padding-top: 100px; /* Add top padding to prevent collision with the navbar */
+}
+
+/* Modal content */
+.edit-job-modal-content {
+    position: relative; /* Ensure the close button is positioned relative to the modal content */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 60%;
+    max-width: 500px;
+    max-height: calc(100% - 120px); /* Adjust max height to account for padding */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    margin: auto; /* Center the modal horizontally */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+    box-sizing: border-box;
+}
+
+/* Close button */
+.edit-job-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.edit-job-close:hover,
+.edit-job-close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Input and textarea styling */
+.edit-job-modal-content input[type="text"],
+.edit-job-modal-content input[type="date"],
+.edit-job-modal-content textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Label styling */
+.edit-job-modal-content label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Submit button */
+.edit-job-submit {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* Submit button hover effect */
+.edit-job-submit:hover {
+    background-color: #0056b3;
+}
+
+/* Form select styling */
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+/* Status classes */
+.status-accepted {
+    color: green;
+    font-weight: bold;
+}
+
+.status-rejected {
+    color: red;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: orange;
+    font-weight: bold;
+}
+
+/* Status icons */
+.status-icons {
+    display: inline-flex;
+    gap: 8px;
+    margin-left: 10px;
+}
+
+.checkmark,
+.crossmark {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.checkmark:hover {
+    color: green;
+}
+
+.crossmark:hover {
+    color: red;
+}
+
+.status-icons .checkmark.active {
+    color: green;
+}
+
+.status-icons .crossmark.active {
+    color: red;
+}
+
+.stage-green {
+    color: green;
+}
+
+.stage-red {
+    color: red;
+}
+
+.stage-default {
+    color: orange;
+}
+/* Style for the applicant detail modal */
+.applicant-detail-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.applicant-detail-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80%;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.applicant-detail-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.applicant-detail-close:hover,
+.applicant-detail-close:focus {
+    color: #007bff; /* Change this to your preferred color */
+}
+
+.applicant-detail-content h3 {
+    margin-top: 0;
+    font-size: 1.5em;
+    border-bottom: 2px solid #007bff; /* Optional: adds a bottom border for emphasis */
+    padding-bottom: 10px;
+}
+
+.applicant-detail-content p {
+    margin: 10px 0;
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+.applicant-detail-content strong {
+    font-weight: bold;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .edit-job-modal-content {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .edit-job-modal-content {
+        width: 95%;
+    }
+
+    .card {
+        width: 100%;
+    }
+}
+/* Style for the search container */
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.search-container input {
+    width: 100%;
+    max-width: 400px; /* Adjust as needed */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.search-container input:focus {
+    border-color: #007bff; /* Change this to your preferred focus color */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); /* Optional: adds a shadow effect */
+}
+
+.search-container button {
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin-left: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.search-container button:hover,
+.search-container button:focus {
+    background-color: #0056b3; /* Change this to your preferred hover color */
+    transform: translateY(-2px); /* Optional: adds a subtle lift effect on hover */
+}
+
+.search-container button:active {
+    background-color: #004494; /* Change this to your preferred active color */
+    transform: translateY(0); /* Reset the lift effect */
+}
+.stage-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .stage-container span {
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .stage-current {
+    background-color: orange;
+    color: white;
+  }
+  
+  .stage-completed {
+    background-color: green;
+    color: white;
+  }
+  
+  .stage-pending {
+    background-color: lightgray;
+    color: black;
+  }
+  
+  .disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }

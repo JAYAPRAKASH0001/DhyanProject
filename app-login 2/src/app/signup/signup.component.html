@@ -1,0 +1,139 @@
+<form (ngSubmit)="onSignup()" #signupForm="ngForm">
+    <!-- First Name Input -->
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" [(ngModel)]="studentObj.firstName" #firstName="ngModel"
+            required class="form-control" />
+        <div class="alert alert-danger" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+            First name is required.
+        </div>
+    </div>
+
+    <!-- Last Name Input -->
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" [(ngModel)]="studentObj.lastName" #lastName="ngModel" required
+            class="form-control" />
+        <div class="alert alert-danger" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+            Last name is required.
+        </div>
+    </div>
+
+    <!-- Password Input -->
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" [(ngModel)]="studentObj.password" #password="ngModel"
+            required class="form-control" />
+        <div class="alert alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+            Password is required.
+        </div>
+    </div>
+
+    <!-- Gender Input -->
+    <div class="form-group">
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender" [(ngModel)]="studentObj.gender" #gender="ngModel" required
+            class="form-control">
+            <option value="">Select Gender</option>
+            <option value="MALE">Male</option>
+            <option value="FEMALE">Female</option>
+        </select>
+        <div class="alert alert-danger" *ngIf="gender.invalid && (gender.dirty || gender.touched)">
+            Gender is required.
+        </div>
+    </div>
+
+    <!-- Date of Birth Input -->
+    <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" name="dob" [(ngModel)]="studentObj.dob" #dob="ngModel" required
+            class="form-control" />
+        <div class="alert alert-danger" *ngIf="dob.invalid && (dob.dirty || dob.touched)">
+            Date of birth is required.
+        </div>
+    </div>
+
+    <!-- Phone Number Input -->
+    <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" [(ngModel)]="studentObj.phoneNumber"
+            #phoneNumber="ngModel" required class="form-control" />
+        <div class="alert alert-danger" *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)">
+            Phone number is required.
+        </div>
+    </div>
+
+    <!-- Email Input -->
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" [(ngModel)]="studentObj.email" #email="ngModel" required
+            class="form-control" />
+        <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+            Valid email is required.
+        </div>
+    </div>
+
+    <!-- 10th Mark Input -->
+    <div class="form-group">
+        <label for="mark10th">10th Mark</label>
+        <input type="number" id="mark10th" name="mark10th" [(ngModel)]="studentObj.mark10th" #mark10th="ngModel"
+            required class="form-control" />
+        <div class="alert alert-danger" *ngIf="mark10th.invalid && (mark10th.dirty || mark10th.touched)">
+            10th mark is required.
+        </div>
+    </div>
+
+    <!-- 12th Mark Input -->
+    <div class="form-group">
+        <label for="mark12th">12th Mark</label>
+        <input type="number" id="mark12th" name="mark12th" [(ngModel)]="studentObj.mark12th" #mark12th="ngModel"
+            required class="form-control" />
+        <div class="alert alert-danger" *ngIf="mark12th.invalid && (mark12th.dirty || mark12th.touched)">
+            12th mark is required.
+        </div>
+    </div>
+
+    <!-- UG Mark Input -->
+    <div class="form-group">
+        <label for="ugMark">UG Mark</label>
+        <input type="number" id="ugMark" name="ugMark" [(ngModel)]="studentObj.ugMark" #ugMark="ngModel" required
+            class="form-control" />
+        <div class="alert alert-danger" *ngIf="ugMark.invalid && (ugMark.dirty || ugMark.touched)">
+            UG mark is required.
+        </div>
+    </div>
+
+    <!-- Backlog Input -->
+    <div class="form-group">
+        <label for="backlog">Backlog</label>
+        <input type="number" id="backlog" name="backlog" [(ngModel)]="studentObj.backlog" #backlog="ngModel" required
+            class="form-control" />
+        <div class="alert alert-danger" *ngIf="backlog.invalid && (backlog.dirty || backlog.touched)">
+            Backlog is required.
+        </div>
+    </div>
+
+    <!-- Active Backlog Input -->
+    <div class="form-group">
+        <label for="activeBacklog">Active Backlog</label>
+        <input type="number" id="activeBacklog" name="activeBacklog" [(ngModel)]="studentObj.activeBacklog"
+            #activeBacklog="ngModel" required class="form-control" />
+        <div class="alert alert-danger" *ngIf="activeBacklog.invalid && (activeBacklog.dirty || activeBacklog.touched)">
+            Active backlog is required.
+        </div>
+    </div>
+
+    <!-- Interested Course Input -->
+    <div class="form-group">
+        <label for="interestedCourse">Interested Course</label>
+        <input type="text" id="interestedCourse" name="interestedCourse" [(ngModel)]="studentObj.interestedCourse"
+            #interestedCourse="ngModel" required class="form-control" />
+        <div class="alert alert-danger"
+            *ngIf="interestedCourse.invalid && (interestedCourse.dirty || interestedCourse.touched)">
+            Interested course is required.
+        </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Sign Up</button>
+</form>

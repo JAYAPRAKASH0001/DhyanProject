@@ -1,0 +1,99 @@
+<app-navbar></app-navbar>
+<div class="dashboard">
+    <div class="student-profile" *ngIf="!loading && student">
+        <div class="profile-header">
+            <h1><strong>{{ student?.firstName }} {{ student?.lastName }}</strong></h1>
+            <img *ngIf="student?.profilePicture" [src]="student?.profilePicture" class="profile-picture"
+                alt="Profile Picture">
+        </div>
+        <div class="profile-info">
+            <p><strong>Email:</strong> {{ student?.email }}</p>
+            <p><strong>Phone Number:</strong> {{ student?.phoneNumber }}</p>
+            <p><strong>Gender:</strong> {{ student?.gender }}</p>
+            <p><strong>Date of Birth:</strong> {{ student?.dob | date }}</p>
+            <p><strong>10th Mark:</strong> {{ student?.mark10th }}</p>
+            <p><strong>12th Mark:</strong> {{ student?.mark12th }}</p>
+            <p><strong>UG Mark:</strong> {{ student?.ugMark }}</p>
+            <p><strong>Backlogs:</strong> {{ student?.backlog }}</p>
+            <p><strong>Active Backlogs:</strong> {{ student?.activeBacklog }}</p>
+            <p><strong>Interested Course:</strong> {{ student?.interestedCourse }}</p>
+        </div>
+        <!-- Add the Edit button here -->
+        <button class="edit-button" (click)="openEditModal()">Edit</button>
+    </div>
+
+    <div *ngIf="loading" class="loading">
+        <p>Loading student data...</p>
+    </div>
+    <div class="application-status">
+        <div class="status-container">
+            <div class="status-card applied">
+                <h4>Applied</h4>
+                <p>{{ appliedCount }}</p>
+            </div>
+            <div class="status-card accepted">
+                <h4>Accepted</h4>
+                <p>{{ acceptedCount }}</p>
+            </div>
+            <div class="status-card rejected">
+                <h4>Rejected</h4>
+                <p>{{ rejectedCount }}</p>
+            </div>
+            <div class="status-card pending">
+                <h4>Pending</h4>
+                <p>{{ pendingCount }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Student Edit Modal -->
+<div class="modal" *ngIf="isEditModalOpen">
+    <div class="edit-student-modal-content">
+        <span class="edit-student-close" (click)="closeEditModal()">&times;</span>
+        <h3>Edit Student Details</h3>
+        <form (ngSubmit)="saveStudent()">
+            <label>First Name:
+                <input type="text" [(ngModel)]="student.firstName" name="firstName" required />
+            </label>
+            <label>Last Name:
+                <input type="text" [(ngModel)]="student.lastName" name="lastName" required />
+            </label>
+            <label>Email:
+                <input type="email" [(ngModel)]="student.email" name="email" required />
+            </label>
+            <label>Phone Number:
+                <input type="text" [(ngModel)]="student.phoneNumber" name="phoneNumber" />
+            </label>
+            <label>Gender:
+                <select [(ngModel)]="student.gender" name="gender" required>
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </label>
+            <label>Date of Birth:
+                <input type="date" [(ngModel)]="student.dob" name="dob" />
+            </label>
+            <label>10th Mark:
+                <input type="number" [(ngModel)]="student.mark10th" name="mark10th" />
+            </label>
+            <label>12th Mark:
+                <input type="number" [(ngModel)]="student.mark12th" name="mark12th" />
+            </label>
+            <label>UG Mark:
+                <input type="number" [(ngModel)]="student.ugMark" name="ugMark" />
+            </label>
+            <label>Backlogs:
+                <input type="number" [(ngModel)]="student.backlog" name="backlog" />
+            </label>
+            <label>Active Backlogs:
+                <input type="number" [(ngModel)]="student.activeBacklog" name="activeBacklog" />
+            </label>
+            <label>Interested Course:
+                <input type="text" [(ngModel)]="student.interestedCourse" name="interestedCourse" />
+            </label>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</div>

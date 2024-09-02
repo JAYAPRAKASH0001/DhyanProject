@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+<div class="job-application-form">
+    <h2>Create Job Application</h2>
+
+    <form (ngSubmit)="onCreateJobApplication()" #jobForm="ngForm">
+        <div>
+            <label for="companyName">
+                <i class="fas fa-building"></i> Company Name:
+            </label>
+            <input type="text" id="companyName" name="companyName" [(ngModel)]="jobApplicationObj.company_name"
+                required>
+        </div>
+
+        <div>
+            <label for="type">
+                <i class="fas fa-tag"></i> Type:
+            </label>
+            <input type="text" id="type" name="type" [(ngModel)]="jobApplicationObj.type" required>
+        </div>
+
+        <div>
+            <label for="role">
+                <i class="fas fa-briefcase"></i> Role:
+            </label>
+            <input type="text" id="role" name="role" [(ngModel)]="jobApplicationObj.role" required>
+        </div>
+
+        <div>
+            <label for="status">
+                <i class="fas fa-info-circle"></i> Status:
+            </label>
+            <input type="text" id="status" name="status" [(ngModel)]="jobApplicationObj.status" required>
+        </div>
+
+        <div>
+            <label for="location">
+                <i class="fas fa-map-marker-alt"></i> Location:
+            </label>
+            <input type="text" id="location" name="location" [(ngModel)]="jobApplicationObj.location" required>
+        </div>
+
+        <div>
+            <label for="packageLpa">
+                <i class="fas fa-money-bill-wave"></i> Package (LPA):
+            </label>
+            <input type="text" id="packageLpa" name="packageLpa" [(ngModel)]="jobApplicationObj.package_lpa" required>
+        </div>
+
+        <div>
+            <label for="description">
+                <i class="fas fa-file-alt"></i> Description:
+            </label>
+            <textarea id="description" name="description" [(ngModel)]="jobApplicationObj.discreption"
+                required></textarea>
+        </div>
+
+        <div>
+            <label for="noRounds">
+                <i class="fas fa-round"></i> Number of Rounds:
+            </label>
+            <input type="text" id="noRounds" name="noRounds" [(ngModel)]="jobApplicationObj.no_rounds" required>
+        </div>
+
+        <div>
+            <label for="applyBefore">
+                <i class="fas fa-calendar-alt"></i> Apply Before:
+            </label>
+            <input type="date" id="applyBefore" name="applyBefore" [(ngModel)]="jobApplicationObj.apply_before"
+                required>
+        </div>
+
+        <button type="submit" [disabled]="!jobForm.form.valid">Create Job Application</button>
+    </form>
+</div>

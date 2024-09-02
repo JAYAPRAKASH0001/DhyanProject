@@ -1,0 +1,94 @@
+<app-navbar></app-navbar>
+
+<div>
+    <div class="card-container">
+        <div class="card" *ngFor="let job of jobApplications">
+            <div class="card-header">
+                <h3>{{ job.company_name }}</h3>
+            </div>
+
+            <div class="card-content">
+                <div class="card-body">
+                    <p><strong>Type:</strong> {{ job.type }}</p>
+                    <p><strong>Location:</strong> <i class="bi bi-geo-alt"></i> {{ job.location }}</p>
+                    <p><strong>Salary:</strong> {{ job.package_lpa }} LPA</p>
+                    <p><strong>Role:</strong> {{ job.role }}</p>
+
+                    <!-- Display status and stage only if the student has applied -->
+                    <p *ngIf="hasApplied(job.id)">
+                        <strong>Status:</strong>
+                        <span [ngClass]="{
+              'status-applied': applicationStatuses[job.id]?.status === 'Applied',
+              'status-accepted': applicationStatuses[job.id]?.status === 'ACCEPTED',
+              'status-rejected': applicationStatuses[job.id]?.status === 'REJECTED',
+              'status-pending' : applicationStatuses[job.id]?.status === 'PENDING'
+            }">
+                            {{ applicationStatuses[job.id]?.status }}
+                        </span>
+                    </p>
+                    <p *ngIf="hasApplied(job.id)">
+                        <strong>Stage:</strong>
+                        <span class="stage-blue">
+                            {{ applicationStatuses[job.id]?.stage }}
+                        </span>
+                    </p>
+
+                    <!-- Always show View Details button -->
+                    <button (click)="viewDetails(job)">View Details</button>
+
+                    <!-- Only show Apply button if the student has not applied -->
+                    <button *ngIf="!hasApplied(job.id) && job.status !== 'Closed'" (click)="apply(job)">Apply</button>
+                </div>
+
+                <!-- New card-status-container -->
+                <div class="card-status-container">
+                    <!-- Apply Before text below the status -->
+                    <div class="apply-before">
+                        <strong>Apply Before</strong> <br>{{ job.apply_before }}
+                    </div>
+                    <!-- Job status aligned to the right -->
+                    <div class="card-status" [ngClass]="{
+                      'status-open': job.status === 'Open', 
+                      'status-closed': job.status === 'Closed'
+                    }">
+                        {{ job.status }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for job application details -->
+    <div class="modal" [ngClass]="{'show': showModal}">
+        <div class="modal-content">
+            <span class="close" (click)="closeModal()">&times;</span>
+            <h3>{{ selectedJob?.company_name }}</h3>
+            <p><strong>Type:</strong> {{ selectedJob?.type }}</p>
+            <p><strong>Location:</strong> {{ selectedJob?.location }}</p>
+            <p><strong>Salary:</strong> {{ selectedJob?.package_lpa }} LPA</p>
+            <p><strong>Role:</strong> {{ selectedJob?.role }}</p>
+            <p><strong>Description:</strong> {{ selectedJob?.discreption }}</p>
+            <p><strong>Rounds:</strong> {{ selectedJob?.no_rounds }}</p>
+            <p><strong>Apply Before:</strong> {{ selectedJob?.apply_before }}</p>
+
+            <!-- Horizontal stages container -->
+            <div class="stages-container">
+                <div *ngFor="let stage of stages; let i = index" class="stage">
+                    <div class="circle" [ngClass]="{ 
+                     'completed': i < currentStageIndex, 
+                     'current': i === currentStageIndex 
+                   }"></div>
+                    <!-- Line only if not the last stage -->
+                    <div *ngIf="i < stages.length - 1" class="line"></div>
+                    <div class="stage-label">{{ stage }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
