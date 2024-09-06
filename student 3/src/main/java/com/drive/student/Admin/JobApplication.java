@@ -1,6 +1,8 @@
 package com.drive.student.Admin;
 
 import com.drive.student.Application.Application;
+import com.drive.student.model.Student;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -8,7 +10,9 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -34,4 +38,8 @@ public class JobApplication {
     @OneToMany(mappedBy = "jobApplication", cascade = CascadeType.ALL, orphanRemoval = true)
    // @JsonIgnoreProperties("jobApplication")
     private List<Application> applications;
+
+    @ManyToMany(mappedBy = "favouriteJobs")
+    @JsonIgnore
+    private Set<Student> students = new HashSet<>();
 }

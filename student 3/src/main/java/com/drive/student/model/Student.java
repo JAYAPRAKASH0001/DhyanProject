@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -48,4 +50,17 @@ public class Student {
 
     private String interestedCourse;
 
+    @ManyToMany
+    @JoinTable(
+            name = "favourite_job",
+            joinColumns = @JoinColumn(
+                    name = "student_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "job_id",
+                    referencedColumnName = "id"
+            )
+    )
+    private Set<JobApplication> favouriteJobs = new HashSet<>();
 }
