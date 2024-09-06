@@ -1,8 +1,8 @@
 package com.drive.student.model;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
+import com.drive.student.Admin.JobApplication;
+import com.drive.student.Admin.JobApplicationService;
 import com.drive.student.AdminLogin.Admin;
 import com.drive.student.AdminLogin.AdminService;
 
@@ -13,8 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/students")
@@ -27,6 +25,8 @@ public class StudentController {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private  AdminService adminService;
+    @Autowired
+    private JobApplicationService jobApplicationService;
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
@@ -43,9 +43,6 @@ public class StudentController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
     }
-
-
-
 
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody Student student) {
@@ -113,8 +110,60 @@ public class StudentController {
         return ResponseEntity.noContent().build();
     }
 
-
     // Jop Controller
+    //This will get all the list of jobs that to be favourite for a specific user
+    @GetMapping("/{studentId}/get-fav-jobs")
+    public ResponseEntity<Set<JobApplication>> getFavJobs(@PathVariable Long studentId) {
+        Optional<Student> studentOpt = studentService.findStudentById(studentId);
+        if (studentOpt.isPresent()) {
+            Student student = studentOpt.get();
+            return ResponseEntity.ok().body(student.getFavouriteJobs());
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
+    //This will make the specific job to favourite one for a specific user
+    @PostMapping("/{studentId}/add-jobs/{jobId}")
+    public ResponseEntity<String> addJobToStudent(@PathVariable Long studentId, @PathVariable Long jobId) {
+        Optional<Student> studentOpt = studentService.findStudentById(studentId);
+        Optional<JobApplication> jobOpt = jobApplicationService.getJobApplicationById(jobId);
 
+        if (studentOpt.isPresent() && jobOpt.isPresent()) {
+            Student student = studentOpt.get();
+            JobApplication jobApplication = jobOpt.get();
+
+            student.getFavouriteJobs().add(jobApplication);
+            studentService.saveStudent(student);
+
+            return ResponseEntity.ok("Job added to student successfully.");
+        } else {
+            return ResponseEntity.status(404).body("Student or Job not found.");
+        }
+    }
+
+    //This will be used when the user remove the favourite job
+    @DeleteMapping("/{studentId}/delete-fav-job/{jobId}")
+    public ResponseEntity<String> deleteFavouriteJob(@PathVariable Long studentId, @PathVariable Long jobId) {
+        Optional<Student> studentOpt = studentService.findStudentById(studentId);
+        Optional<JobApplication> jobOpt = jobApplicationService.getJobApplicationById(jobId);
+
+        if (studentOpt.isPresent() && jobOpt.isPresent()) {
+            Student student = studentOpt.get();
+            JobApplication jobApplication = jobOpt.get();
+
+            if (student.getFavouriteJobs().contains(jobApplication)) {
+                student.getFavouriteJobs().remove(jobApplication);
+                studentService.saveStudent(student);
+                return ResponseEntity.ok("Job removed from student's favorites successfully.");
+            }
+            else {
+                return ResponseEntity.status(404).body("The student does not have this job in their favorites.");
+            }
+        }
+        else {
+            return ResponseEntity.status(404).body("Student or Job not found.");
+        }
+    }
 }

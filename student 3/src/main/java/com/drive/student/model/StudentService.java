@@ -30,6 +30,11 @@ public class StudentService {
     public Student getStudentById(Long id) {
         return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
     }
+
+    public Optional<Student> findStudentById(Long id) {
+        return studentRepository.findById(id);
+    }
+
     public Optional<Student> getStudentByEmail(String email) {
         return studentRepository.findByEmail(email);
     }
@@ -66,5 +71,7 @@ public class StudentService {
         studentRepository.delete(student);
     }
 
-
+    public Student saveStudent(Student student) {
+        return studentRepository.save(student);
+    }
 }
