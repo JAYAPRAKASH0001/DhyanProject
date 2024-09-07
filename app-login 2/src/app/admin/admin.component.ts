@@ -27,7 +27,7 @@ export class AdminComponent {
 
     this.http.post(createJobApplicationUrl, this.jobApplicationObj, { headers, responseType: 'text' }).subscribe(
       (response: any) => {
-        console.log('Job application created successfully:', response);
+        console.log('Job application created successfully:yyyy', response);
         this.toastr.success('Job application' ,'Created Successfully')
         this.router.navigate(['/joblist']); 
       },

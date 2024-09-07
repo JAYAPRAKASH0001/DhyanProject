@@ -47,9 +47,12 @@
                         <strong>Stage:</strong>
                         <div class="stage-container">
                             <span *ngFor="let stage of stageList" [ngClass]="getStageClass(applicant, stage)"
-                                (click)="updateStage(applicant, stage)" [class.disabled]="stage === applicant.stage">
+                                (click)="updateStage(applicant, stage)"
+                                [class.disabled]="applicant.status !== 'ACCEPTED'"
+                                [style.cursor]="applicant.status !== 'ACCEPTED' ? 'not-allowed' : 'pointer'">
                                 {{ stage }}
                             </span>
+
                         </div>
                     </div>
                     <div class="applicant-buttons">

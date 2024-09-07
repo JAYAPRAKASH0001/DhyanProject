@@ -90,7 +90,6 @@ export class AdminJobListComponent implements OnInit {
       (data) => {
         this.selectedApplicants = data;
         this.isModalOpen = true;
-        console.log('Applicants for job ID', jobId, ':', data);
       },
       (error) => {
         this.handleError(error);
@@ -120,6 +119,11 @@ export class AdminJobListComponent implements OnInit {
   stageList = ['Applied', 'WrittenTest', 'Technical Interview 1', 'Technical Interview 2', 'HR Round', 'Job Offer'];
 
   updateStage(applicant: ApplicantDTO, stage: string): void {
+    if (applicant.status !== 'ACCEPTED') {
+      this.toastr.warning('Accept the application first');
+      return;
+    }
+  
     const apiUrl = `http://localhost:8080/api/applications/${applicant.id}/stage?stage=${stage}&is_stage=${this.stageList.indexOf(stage)}`;
     this.http.put(apiUrl, {}, { withCredentials: true }).subscribe(
       () => {
@@ -134,6 +138,7 @@ export class AdminJobListComponent implements OnInit {
       }
     );
   }
+  
 
   getStageClass(applicant: ApplicantDTO, stage: string): string {
     const currentStageIndex = this.stageList.indexOf(applicant.stage);
